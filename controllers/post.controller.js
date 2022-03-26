@@ -72,26 +72,30 @@ if (!isexist) {
 exports.getAllPost = async (req, res, next) => {
     try {
       const Op=Sequalize.Op
-        let conditions = [];
+        let conditions = {};
         let catagory = !!req.query.catagory ? req.query.catagory : '';
         let location = !!req.query.location ? req.query.location : '';
         let price = !!req.query.price ? req.query.price : !!req.query.price;
         let brandname = !!req.query.brandname ? req.query.brandname : !!req.query.brandname;
       if (catagory) {
-          conditions.push({catagory:req.params.catagory});
+          conditions.catagory=catagory
+          // conditions.push({catagory:req.params.catagory});
         }
         if (location) {
-            conditions.push({city: location });
+          conditions.city=location
+            // conditions.push({city: location });
         }
         if (price) {
-            conditions.push({ price: {[Op.lte]: price } });
+          conditions.price=price
+            // conditions.push({ price: {[Op.lte]: price } });
         }
         if (brandname) {
-            conditions.push({ brandName: brandname });
+          conditions.brandName=brandname
+            // conditions.push({ brandName: brandname });
         }
-        let final_condition = { $and: conditions };
         
-        const posts = await Post.findAll(final_condition)
+        console.log(conditions)
+        const posts = await Post.findAll({where:conditions})
         return res.json(posts)
     }
     catch(error) {
