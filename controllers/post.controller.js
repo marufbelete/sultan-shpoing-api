@@ -16,8 +16,9 @@ exports.createPost=async (req, res, next) => {
     const imgurl=[]
     if (req.files.length > 0)
     {
-        if (!fs.existsSync("../images")){
-            fs.mkdirSync("../images");
+        if (!fs.existsSync("./images")){
+          console.log("create file")
+            fs.mkdirSync("./images");
         }
 console.log(req.files.length)
   for(let f=0;f<req.files.length;f++)
