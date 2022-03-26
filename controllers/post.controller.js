@@ -86,8 +86,8 @@ exports.getAllPost = async (req, res, next) => {
             // conditions.push({city: location });
         }
         if (price) {
-          conditions.price=price
-            // conditions.push({ price: {[Op.lte]: price } });
+          conditions.price={[Op.lte]: price }
+            // conditions.push({ price:  });
         }
         if (brandname) {
           conditions.brandName=brandname
