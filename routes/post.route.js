@@ -3,6 +3,7 @@ const userauth = require("../middleware/auth.middleware")
 const { createPost,getAllPost,getMyPost,deletePost,updatePost } = require('../controllers/post.controller')
 const {createCatagory,getCatgory,updateCatagory,deleteCatagory} = require('../controllers/catagory.controller')
 const {createLocation,getCity,updateCity,deleteCity} = require('../controllers/location.controller')
+const { getOtp} = require('../controllers/otp.controller')
 const {errorHandler} = require('../middleware/errohandling.middleware')
 const multer=require("multer");
 const router = express.Router();
@@ -41,6 +42,8 @@ router.post('/addcity', userauth,createLocation,errorHandler)
 router.get('/getcity', userauth,getCity,errorHandler)
 router.put('/updatecity/:id', userauth,updateCity,errorHandler)
 router.delete('/deletecity/:id', userauth,deleteCity,errorHandler)
+//otp
+router.post('/getotp', userauth,getOtp,errorHandler)
 
 module.exports = router
 
